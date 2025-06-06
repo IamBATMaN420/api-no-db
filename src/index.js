@@ -63,7 +63,13 @@ app.get("/api", (req, res) => {
 app.get("/api/products", (req, res) => {
   res.json(products);
 })
-// show all products from dummy data
+// reading all product
+
+app.post("/api/products", (req, res) => {
+  console.log(req.body)
+  res.send("Okay")
+})
+// crateing product
 
 app.listen(3000, () => {
   console.log(`server is running on port 3000`)
