@@ -52,11 +52,18 @@ const products = [
     active: true
   }
 ];
-// fummy data
+// dummy data
+
+
 
 app.get("/api", (req, res) => {
   res.send("helllo it's working!")
 });
+
+app.get("/api/products", (req, res) => {
+  res.json(products);
+})
+// show all products from dummy data
 
 app.listen(3000, () => {
   console.log(`server is running on port 3000`)
