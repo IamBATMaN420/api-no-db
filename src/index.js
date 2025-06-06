@@ -56,8 +56,6 @@ const products = [
 ];
 // dummy data
 
-
-
 app.get("/api", (req, res) => {
   res.send("helllo it's working!")
 });
@@ -68,8 +66,8 @@ app.get("/api/products", (req, res) => {
 // reading all product
 
 app.post("/api/products", (req, res) => {
-  console.log(req.body)
-  res.send("Okay")
+  products.push(req.body)
+  res.status(201).json({ "masage": "product is added" })
 })
 // crateing product
 
