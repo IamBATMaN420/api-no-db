@@ -1,7 +1,8 @@
 import express from "express"
+import crypto from "crypto";
 
 const app = express();
-
+//hey working
 app.use(express.json())
 
 const products = [
@@ -57,7 +58,7 @@ const products = [
 // dummy data
 
 app.get("/api", (req, res) => {
-  res.send("helllo it's working!")
+  res.send("helllo it's working!1")
 });
 
 app.get("/api/products", (req, res) => {
@@ -66,10 +67,23 @@ app.get("/api/products", (req, res) => {
 // reading all product
 
 app.post("/api/products", (req, res) => {
-  products.push(req.body)
+  const { name, price, quantity, active } = req.body;
+
+  if (!name) {
+    res.status(422).json(
+      { "message": "nahi honga bhai" }
+    )
+  }
+
+  const id = crypto.randomUUID()
+  products.push({ id,name, price, quantity, active })
   res.status(201).json({ "masage": "product is added" })
 })
 // crateing product
+
+const id = crypto()
+
+app.get("/api/product/:id",)
 
 app.listen(3000, () => {
   console.log(`server is running on port 3000`)
