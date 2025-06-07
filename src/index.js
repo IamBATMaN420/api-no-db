@@ -131,7 +131,7 @@ app.put("/api/products/:id", (req, res) => {
     product.active = active
   }
   res.status(201).json({
-    "messgae": "Update is working"
+    "messgae": "Update is workingg"
   })
 })
 
