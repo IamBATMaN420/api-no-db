@@ -88,14 +88,68 @@ app.post("/api/products", (req, res) => {
   products.push({ id, name, price, quantity, active })
   res.status(201).json({ "masage": "product is added", id })
 
-
 })
 // crateing product
 
 
 
-app.get("/api/product/:id",)
+app.get("/api/products/:id", (req, res) => {
+  const product = products.find(product => product.id == req.params.id)
+  if (!product) {
+    res.status(404).json({
+      "message": "WTH go away"
+    })
+  }
+  res.status(201).json(product)
+})
+// get a product by :id
 
-app.listen(3000, () => {
-  console.log(`server is running on port 3000`)
+app.put("/api/products/:id", (req, res) => {
+  const product = products.find(product => product.id == req.params.id)
+  if (!product) {
+    res.status(404).json({
+      "message": "WTH go away"
+    })
+  }
+
+  const { name, price, quantity, active } = req.body;
+  if (!name) {
+    res.json({
+      "msssage": "Nah hain bhai",
+    })
+  }
+  if (name) {
+    product.name = name
+  }
+  if (price) {
+    product.price = price
+  }
+  if (quantity) {
+    product.quantity = quantity
+  }
+  if ("active" in req.body) {
+    product.active = active
+  }
+  res.status(201).json({
+    "messgae": "Update is working"
+  })
+})
+
+app.delete("/api/products/:id", (req, res) => {
+  const productIndex = products.find(productIndex => productIndex.id == req.params.id)
+  if (productIndex == -1) {
+    res.status(404).json({
+      "messgae": "hey unexpected backchodi!"
+    })
+  }
+
+  products.splice(productIndex, 1)
+  res.status(201).json({
+    "message": "Delete is working!!!"
+  })
+
+})
+
+app.listen(3010, () => {
+  console.log(`server is running on port 3010`)
 })
